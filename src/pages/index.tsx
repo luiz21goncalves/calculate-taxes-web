@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import Head from 'next/head';
 
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import style from '../styles/home.module.scss';
 
@@ -35,18 +36,7 @@ export default function Home() {
           </p>
         </main>
 
-        <footer>
-          <p>
-            Desenvolvido com 💜 por{' '}
-            <a
-              href="https://github.com/luiz21goncalves"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Luiz Gonçalves
-            </a>
-          </p>
-        </footer>
+        <Footer />
       </div>
     </>
   );
