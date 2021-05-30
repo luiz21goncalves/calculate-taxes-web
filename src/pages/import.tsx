@@ -7,40 +7,10 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Upload from '../components/Upload';
 import styles from '../styles/import.module.scss';
+import Table, { Note } from '../components/Table';
 
 interface ImportProps {
   baseUrl: string;
-}
-
-interface Company {
-  name: string;
-  cnpj: string;
-}
-
-interface Product {
-  id: number;
-  name: string;
-  total_price: number;
-  unit_price: number;
-}
-
-interface Total {
-  discount: number;
-  icms_st: number;
-  ipi: number;
-  nf: number;
-  others: number;
-  products: number;
-  safe: number;
-  shipping: number;
-}
-
-interface Note {
-  number: number;
-  seller: Company;
-  customer: Company;
-  products: Product[];
-  total: Total;
 }
 
 export default function Import({ baseUrl }: ImportProps) {
@@ -52,16 +22,16 @@ export default function Import({ baseUrl }: ImportProps) {
     setFile(files[0]);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
-      setShowInput(false);
-
       const data = new FormData();
       data.append('file', file, file.name);
 
-      axios
-        .post<Note>(`${baseUrl}/xml/import`, data)
-        .then((response) => setNote(response.data));
+      const response = await axios.post<Note>(`${baseUrl}/xml/import`, data);
+
+      setNote(response.data);
+
+      setShowInput(false);
     } catch (err) {
       console.error(err);
       toast.error('Ocorreu um erro tente novamente ou contate o desenvolvedor');
@@ -83,6 +53,8 @@ export default function Import({ baseUrl }: ImportProps) {
             Calcular preço
           </button>
         </div>
+
+        {!showInput && <Table note={note} />}
       </main>
 
       <Footer />

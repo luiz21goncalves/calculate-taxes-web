@@ -13,10 +13,6 @@ export default function Header() {
         <Link href="/">
           <a>Sobre o projeto</a>
         </Link>
-
-        <Link href="#">
-          <a>Ajude o projeto</a>
-        </Link>
       </nav>
     </header>
   );
