@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import Head from 'next/head';
-import Link from 'next/link';
 
+import Header from '../components/Header';
 import style from '../styles/home.module.scss';
 
 export default function Home() {
@@ -14,21 +14,7 @@ export default function Home() {
       </Head>
 
       <div className={style.container}>
-        <header>
-          <nav>
-            <Link href="#">
-              <a>Importar XML</a>
-            </Link>
-
-            <Link href="/">
-              <a>Sobre o projeto</a>
-            </Link>
-
-            <Link href="#">
-              <a>Ajude o projeto</a>
-            </Link>
-          </nav>
-        </header>
+        <Header />
 
         <main>
           <h1>Calcular custo de produtos na NF-e</h1>
