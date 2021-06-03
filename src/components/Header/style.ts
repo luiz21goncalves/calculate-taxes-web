@@ -6,7 +6,7 @@ export const Container = styled.header`
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
 
   > div {
-    max-width: 1080px;
+    max-width: 1120px;
     margin: 0 auto;
     height: 100%;
 
