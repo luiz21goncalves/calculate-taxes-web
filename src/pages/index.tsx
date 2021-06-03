@@ -2,7 +2,7 @@
 import Head from 'next/head';
 
 import Header from '../components/Header';
-import style from '../styles/home.module.scss';
+import { Container } from '../styles/home';
 
 export default function Home() {
   return (
@@ -13,28 +13,26 @@ export default function Home() {
         <link rel="shortcut icon" href="/favicon.png" type="image/png" />
       </Head>
 
-      <div className={style.container}>
-        <Header />
+      <Header />
 
-        <main>
-          <h1>Calcular custo de produtos na NF-e</h1>
+      <Container>
+        <h1>Calcular custo de produtos na NF-e</h1>
 
-          <p>
-            Com tantas dificuldades para empreender no Brasil calcular o custo
-            de aquisição de produtos é mais um deles. A Danfe(Documento Auxiliar
-            da NF-e) não tem todas as informações necessárias, apenas um resumo,
-            e muita das vezes os pequenos empreenderores não tem conhecimento
-            para entender e calcular todas as taxas "ocultas".
-          </p>
+        <p>
+          Com tantas dificuldades para empreender no Brasil calcular o custo de
+          aquisição de produtos é mais um deles. A Danfe(Documento Auxiliar da
+          NF-e) não tem todas as informações necessárias, apenas um resumo, e
+          muita das vezes os pequenos empreenderores não tem conhecimento para
+          entender e calcular todas as taxas "ocultas".
+        </p>
 
-          <p>
-            Depois de uma oportunidade de trabalho em uma contabilidade, conheci
-            toda essa complexidade do mundo dos impostos. Agora como descobri o
-            mundo da programação tive essa ideia, vamos automatizar esse calculo
-            e facilitar a vida de quantas pessoas pudermos
-          </p>
-        </main>
-      </div>
+        <p>
+          Depois de uma oportunidade de trabalho em uma contabilidade, conheci
+          toda essa complexidade do mundo dos impostos. Agora como descobri o
+          mundo da programação tive essa ideia, vamos automatizar esse calculo e
+          facilitar a vida de quantas pessoas pudermos
+        </p>
+      </Container>
     </>
   );
 }
