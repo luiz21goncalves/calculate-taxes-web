@@ -18,7 +18,6 @@ const dragReject = css`
 
 export const DropContainer = styled.div<DropContainerProps>`
   width: 100%;
-  margin: 5rem auto 0;
   padding: 2rem;
   background: var(--white);
   border-radius: 8px;

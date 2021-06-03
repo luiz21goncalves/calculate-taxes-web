@@ -1,63 +1,40 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  max-width: 1120px;
+export const Container = styled.table`
   width: 100%;
-  height: 100%;
-  margin: 0 auto;
+  border-spacing: 0;
 
-  .header {
-    margin: 1.5rem 0;
+  thead {
+    th {
+      padding: 0.75rem;
+      background: var(--blue-500);
+      color: var(--white);
+      text-transform: uppercase;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    div {
-      border: 1px solid var(--gray-300);
-      padding: 1rem;
-
-      strong {
-        margin-left: 0.5rem;
+      & + th {
+        border-left: 1px solid var(--white);
       }
     }
   }
 
-  table {
-    width: 100%;
-
-    thead {
-      th {
-        padding: 0.75rem 0;
-        border-top: 1px solid var(--blue-500);
+  tbody {
+    tr {
+      td {
+        text-align: center;
+        padding: 0.5rem;
         border-bottom: 1px solid var(--blue-500);
-      }
-    }
 
-    tbody {
-      tr {
-        td {
-          text-align: center;
-          padding: 0.5rem;
-          border-bottom: 1px solid var(--blue-500);
+        &:nth-child(1) {
+          border-left: 1px solid var(--blue-500);
         }
-      }
-    }
-  }
 
-  .footer {
-    margin-top: 2rem;
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    align-items: center;
-    justify-content: center;
+        &:last-child {
+          border-right: 1px solid var(--blue-500);
+        }
 
-    p {
-      text-align: center;
-      strong {
-        margin-left: 5px;
+        & + td {
+          border-left: 1px solid var(--blue-500);
+        }
       }
     }
   }
