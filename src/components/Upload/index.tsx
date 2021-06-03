@@ -1,6 +1,6 @@
 import Dropzone from 'react-dropzone';
 
-import styles from './styles.module.scss';
+import { DropContainer, UploadMessage } from './styles';
 
 interface UploadProps {
   onUpload: (files: File[]) => void;
@@ -9,26 +9,28 @@ interface UploadProps {
 export default function Upload({ onUpload }: UploadProps) {
   const renderDragMessage = (isDragActive: boolean, isDragReject: boolean) => {
     if (!isDragActive) {
-      return <p className={styles.text__default}>Arraste xml aqui...</p>;
+      return <UploadMessage type="default">Arraste xml aqui...</UploadMessage>;
     }
 
     if (isDragReject) {
-      return <p className={styles.text__error}>Arquivo não suportado</p>;
+      return <UploadMessage type="error">Arquivo não suportado</UploadMessage>;
     }
 
-    return <p className={styles.text__success}>Solte o xml aqui</p>;
+    return <UploadMessage type="success">Solte o xml aqui</UploadMessage>;
   };
 
   return (
-    <div className={styles.container}>
-      <Dropzone accept="text/xml" onDropAccepted={onUpload}>
-        {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
-          <div className={styles.content} {...getRootProps()}>
-            <input {...getInputProps()} multiple={false} />
-            {renderDragMessage(isDragActive, isDragReject)}
-          </div>
-        )}
-      </Dropzone>
-    </div>
+    <Dropzone accept="text/xml" onDropAccepted={onUpload}>
+      {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
+        <DropContainer
+          {...getRootProps()}
+          isDragActive={isDragActive}
+          isDragReject={isDragReject}
+        >
+          <input {...getInputProps()} multiple={false} />
+          {renderDragMessage(isDragActive, isDragReject)}
+        </DropContainer>
+      )}
+    </Dropzone>
   );
 }
