@@ -21,6 +21,9 @@ export const DropContainer = styled.div<DropContainerProps>`
   padding: 2rem;
   background: var(--white);
   border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   border: 2px dashed #ddd;
   border-radius: 8px;
