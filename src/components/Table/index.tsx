@@ -1,5 +1,5 @@
 import { formattedPrice } from '../../utils';
-import styles from './styles.module.scss';
+import { Container } from './styles';
 
 interface Company {
   name: string;
@@ -39,12 +39,12 @@ interface TableProps {
 
 export default function Table({ note }: TableProps) {
   return (
-    <div className={styles.container}>
+    <Container>
       <p>
         Número da NF-e <strong>{note.number}</strong>
       </p>
 
-      <section className={styles.header}>
+      <section className="header">
         <div>
           <p>
             vendedor: <strong>{note.seller.name}</strong>
@@ -86,7 +86,7 @@ export default function Table({ note }: TableProps) {
         </tbody>
       </table>
 
-      <div className={styles.footer}>
+      <div className="footer">
         <p>
           Valor total da NF-e: <strong>{formattedPrice(note.total.nf)}</strong>
         </p>
@@ -125,6 +125,6 @@ export default function Table({ note }: TableProps) {
           <strong>{formattedPrice(note.total.shipping)}</strong>
         </p>
       </div>
-    </div>
+    </Container>
   );
 }
