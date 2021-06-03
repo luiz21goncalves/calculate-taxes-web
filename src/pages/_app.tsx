@@ -2,14 +2,15 @@ import { AppProps } from 'next/app';
 
 import { ToastContainer } from 'react-toastify';
 
+import { GlobalStyle } from '../styles/global';
 import 'react-toastify/dist/ReactToastify.css';
-import '../styles/global.scss';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Component {...pageProps} />
       <ToastContainer />
+      <GlobalStyle />
     </>
   );
 }
