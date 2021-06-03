@@ -4,9 +4,10 @@ import { DropContainer, UploadMessage } from './styles';
 
 interface UploadProps {
   onUpload: (files: File[]) => void;
+  file: File;
 }
 
-export default function Upload({ onUpload }: UploadProps) {
+export default function Upload({ onUpload, file }: UploadProps) {
   const renderDragMessage = (isDragActive: boolean, isDragReject: boolean) => {
     if (!isDragActive) {
       return <UploadMessage type="default">Arraste xml aqui...</UploadMessage>;
@@ -28,7 +29,11 @@ export default function Upload({ onUpload }: UploadProps) {
           isDragReject={isDragReject}
         >
           <input {...getInputProps()} multiple={false} />
-          {renderDragMessage(isDragActive, isDragReject)}
+          {file ? (
+            <p>{file.name}</p>
+          ) : (
+            renderDragMessage(isDragActive, isDragReject)
+          )}
         </DropContainer>
       )}
     </Dropzone>
