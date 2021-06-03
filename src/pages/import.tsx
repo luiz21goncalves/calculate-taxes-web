@@ -5,11 +5,34 @@ import { toast } from 'react-toastify';
 
 import Header from '../components/Header';
 import Upload from '../components/Upload';
-import { Container, ButtonContainer } from '../styles/import';
-import Table, { Note } from '../components/Table';
+import { Container, Content, TableHeader, TableFooter } from '../styles/import';
+import Table, { Product } from '../components/Table';
+import { formattedPrice } from '../utils';
 
 interface ImportProps {
   baseUrl: string;
+}
+
+interface Company {
+  cnpj: string;
+  name: string;
+}
+
+interface Note {
+  number: number;
+  seller: Company;
+  customer: Company;
+  products: Product[];
+  total: {
+    products: number;
+    others: number;
+    icms_st: number;
+    shipping: number;
+    ipi: number;
+    discount: number;
+    safe: number;
+    nf: number;
+  };
 }
 
 export default function Import({ baseUrl }: ImportProps) {
@@ -42,18 +65,54 @@ export default function Import({ baseUrl }: ImportProps) {
       <Header />
 
       <Container>
-        {showInput && <Upload onUpload={handleUpload} />}
+        <Content>
+          <Upload onUpload={handleUpload} file={file} />
 
-        <ButtonContainer>
-          <button type="button" onClick={() => setShowInput(true)}>
-            Novo upload
-          </button>
           <button type="button" onClick={handleSubmit}>
             Calcular preço
           </button>
-        </ButtonContainer>
+        </Content>
 
-        {!showInput && <Table note={note} />}
+        {!showInput && (
+          <>
+            <TableHeader>
+              <strong>Número: {note.number}</strong>
+              <div>
+                <span>Comprador</span>
+
+                <p>{note.customer.name}</p>
+
+                <p>
+                  <b>CNPJ: </b>
+                  <span>{note.customer.cnpj}</span>
+                </p>
+              </div>
+              <div>
+                <span>Venderdor</span>
+
+                <p>{note.seller.name}</p>
+
+                <p>
+                  <b>CNPJ: </b>
+                  <span>{note.seller.cnpj}</span>
+                </p>
+              </div>
+            </TableHeader>
+
+            <Table products={note.products} />
+
+            <TableFooter>
+              <p>TOTAL DA NF-e: {formattedPrice(note.total.nf)}</p>
+              <p>VALOR DOS PRODUTOS: {formattedPrice(note.total.products)}</p>
+              <p>ICMS ST: {formattedPrice(note.total.icms_st)}</p>
+              <p>IPI: {formattedPrice(note.total.ipi)}</p>
+              <p>SEGURO: {formattedPrice(note.total.safe)}</p>
+              <p>FRETE: {formattedPrice(note.total.shipping)}</p>
+              <p>DESCONTO: {formattedPrice(note.total.discount)}</p>
+              <p>OUTRAS DESPESAS: {formattedPrice(note.total.others)}</p>
+            </TableFooter>
+          </>
+        )}
       </Container>
     </>
   );
