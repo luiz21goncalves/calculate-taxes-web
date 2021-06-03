@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 import Header from '../components/Header';
 import Upload from '../components/Upload';
-import styles from '../styles/import.module.scss';
+import { Container, ButtonContainer } from '../styles/import';
 import Table, { Note } from '../components/Table';
 
 interface ImportProps {
@@ -41,20 +41,20 @@ export default function Import({ baseUrl }: ImportProps) {
     <>
       <Header />
 
-      <main className={styles.container}>
+      <Container>
         {showInput && <Upload onUpload={handleUpload} />}
 
-        <div className={styles.button_container}>
+        <ButtonContainer>
           <button type="button" onClick={() => setShowInput(true)}>
             Novo upload
           </button>
           <button type="button" onClick={handleSubmit}>
             Calcular preço
           </button>
-        </div>
+        </ButtonContainer>
 
         {!showInput && <Table note={note} />}
-      </main>
+      </Container>
     </>
   );
 }
