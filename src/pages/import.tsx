@@ -3,7 +3,6 @@ import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Upload from '../components/Upload';
 import styles from '../styles/import.module.scss';
@@ -56,8 +55,6 @@ export default function Import({ baseUrl }: ImportProps) {
 
         {!showInput && <Table note={note} />}
       </main>
-
-      <Footer />
     </>
   );
 }
