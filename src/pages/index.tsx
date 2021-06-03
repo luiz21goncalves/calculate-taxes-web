@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import Head from 'next/head';
 
-import Footer from '../components/Footer';
 import Header from '../components/Header';
 import style from '../styles/home.module.scss';
 
@@ -35,8 +34,6 @@ export default function Home() {
             e facilitar a vida de quantas pessoas pudermos
           </p>
         </main>
-
-        <Footer />
       </div>
     </>
   );
