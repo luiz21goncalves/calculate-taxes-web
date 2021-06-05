@@ -5,7 +5,7 @@ import { Container, ModalContainer } from './styles';
 import Modal from '../Modal';
 
 interface FormattedProduct {
-  id: number;
+  id: string;
   name: string;
   total_price: number;
   unit_price: number;
@@ -13,7 +13,7 @@ interface FormattedProduct {
 }
 
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   quantity: number;
   unit_price: number;
@@ -26,6 +26,22 @@ export interface Product {
   discount: number;
 }
 
+interface ShowProduct {
+  id: string;
+  name: string;
+  quantity: number;
+  unit_price: number;
+  total_price: number;
+  taxes: {
+    icms_st: number;
+    ipi: number;
+  };
+  other: number;
+  discount: number;
+  unit_price_with_taxes: number;
+  total_price_with_taxes: number;
+}
+
 interface TableProps {
   products: Product[];
 }
@@ -35,6 +51,26 @@ export default function Table({ products }: TableProps) {
     FormattedProduct[]
   >([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [showProduct, setShowProduct] = useState<ShowProduct>(
+    {} as ShowProduct,
+  );
+
+  function handleShowProduct(id: string) {
+    const product = products.find(
+      (findProduct) => findProduct.id === id,
+    ) as ShowProduct;
+
+    const formattedProduct = formattedProducts.find(
+      (findFormattedProduct) => findFormattedProduct.id === id,
+    );
+
+    product.unit_price_with_taxes = formattedProduct.unit_price;
+    product.total_price_with_taxes = formattedProduct.total_price;
+
+    setShowProduct(product);
+
+    toggleModal();
+  }
 
   function toggleModal() {
     setModalIsOpen((state) => !state);
@@ -83,63 +119,67 @@ export default function Table({ products }: TableProps) {
 
       <tbody>
         {formattedProducts.map(
-          ({ id, name, quantity, total_price, unit_price }, index) => (
+          ({ id, name, quantity, total_price, unit_price }) => (
             <tr key={id}>
               <Modal setIsOpen={toggleModal} isOpen={modalIsOpen}>
                 <ModalContainer>
                   <div>
                     <strong>Código: </strong>
-                    <span>{id}</span>
+                    <span>{showProduct?.id}</span>
                   </div>
 
                   <div>
                     <strong>Nome: </strong>
-                    <span>{name}</span>
+                    <span>{showProduct?.name}</span>
                   </div>
 
                   <div>
                     <strong>Quantidade: </strong>
-                    <span>{quantity / 100}</span>
+                    <span>{showProduct?.quantity / 100}</span>
                   </div>
 
                   <div>
                     <strong>Valor unitário: </strong>
-                    <span>{formattedPrice(products[index].unit_price)}</span>
+                    <span>{formattedPrice(showProduct?.unit_price)}</span>
                   </div>
 
                   <div>
                     <strong>Valor total do produto: </strong>
-                    <span>{formattedPrice(products[index].total_price)}</span>
+                    <span>{formattedPrice(showProduct?.total_price)}</span>
                   </div>
 
                   <div>
                     <strong>ICMS ST: </strong>
-                    <span>{formattedPrice(products[index].taxes.icms_st)}</span>
+                    <span>{formattedPrice(showProduct?.taxes?.icms_st)}</span>
                   </div>
 
                   <div>
                     <strong>IPI: </strong>
-                    <span>{formattedPrice(products[index].taxes.ipi)}</span>
+                    <span>{formattedPrice(showProduct?.taxes?.ipi)}</span>
                   </div>
 
                   <div>
                     <strong>Outras despesas: </strong>
-                    <span>{formattedPrice(products[index].other)}</span>
+                    <span>{formattedPrice(showProduct?.other)}</span>
                   </div>
 
                   <div>
                     <strong>Desconto: </strong>
-                    <span>{formattedPrice(products[index].discount)}</span>
+                    <span>{formattedPrice(showProduct?.discount)}</span>
                   </div>
 
                   <div>
                     <strong>Valor unitário com impostos: </strong>
-                    <span>{formattedPrice(unit_price)}</span>
+                    <span>
+                      {formattedPrice(showProduct?.unit_price_with_taxes)}
+                    </span>
                   </div>
 
                   <div>
                     <strong>Valor total com impostos: </strong>
-                    <span>{formattedPrice(total_price)}</span>
+                    <span>
+                      {formattedPrice(showProduct.total_price_with_taxes)}
+                    </span>
                   </div>
                 </ModalContainer>
               </Modal>
@@ -149,7 +189,7 @@ export default function Table({ products }: TableProps) {
               <td>{quantity / 100}</td>
               <td>{formattedPrice(unit_price)}</td>
               <td>
-                <button type="button" onClick={() => setModalIsOpen(true)}>
+                <button type="button" onClick={() => handleShowProduct(id)}>
                   {formattedPrice(total_price)}
                 </button>
 
