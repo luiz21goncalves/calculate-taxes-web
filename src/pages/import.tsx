@@ -9,10 +9,6 @@ import { Container, Content, TableHeader, TableFooter } from '../styles/import';
 import Table, { Product } from '../components/Table';
 import { formattedPrice } from '../utils';
 
-interface ImportProps {
-  baseUrl: string;
-}
-
 interface Company {
   cnpj: string;
   name: string;
@@ -35,7 +31,7 @@ interface Note {
   };
 }
 
-export default function Import({ baseUrl }: ImportProps) {
+export default function Import() {
   const [note, setNote] = useState<Note>({} as Note);
   const [showInput, setShowInput] = useState(true);
   const [file, setFile] = useState(null);
@@ -49,7 +45,10 @@ export default function Import({ baseUrl }: ImportProps) {
       const data = new FormData();
       data.append('file', file, file.name);
 
-      const response = await axios.post<Note>(`${baseUrl}/xml/import`, data);
+      const response = await axios.post<Note>(
+        `${process.env.NEXT_PUBLIC_API_URL}/xml/import`,
+        data,
+      );
 
       setNote(response.data);
 
@@ -116,12 +115,4 @@ export default function Import({ baseUrl }: ImportProps) {
       </Container>
     </>
   );
-}
-
-export async function getStaticProps() {
-  return {
-    props: {
-      baseUrl: process.env.API_URL,
-    },
-  };
 }
