@@ -24,6 +24,7 @@ export interface Product {
   };
   other: number;
   discount: number;
+  shipping: number;
 }
 
 interface ShowProduct {
@@ -40,6 +41,7 @@ interface ShowProduct {
   discount: number;
   unit_price_with_taxes: number;
   total_price_with_taxes: number;
+  shipping: number;
 }
 
 interface TableProps {
@@ -86,10 +88,11 @@ export default function Table({ products }: TableProps) {
         taxes,
         id,
         name,
+        shipping,
       } = product;
 
       const totalPrice =
-        total_price + other + taxes.ipi + taxes.icms_st - discount;
+        total_price + other + taxes.ipi + taxes.icms_st + shipping - discount;
 
       acc.push({
         quantity,
@@ -161,6 +164,11 @@ export default function Table({ products }: TableProps) {
                   <div>
                     <strong>Outras despesas: </strong>
                     <span>{formattedPrice(showProduct?.other)}</span>
+                  </div>
+
+                  <div>
+                    <strong>Frete: </strong>
+                    <span>{formattedPrice(showProduct?.shipping)}</span>
                   </div>
 
                   <div>
