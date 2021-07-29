@@ -1,28 +1,51 @@
 import Link from 'next/link';
 
-import { Container } from './style';
+import { Box, Flex, Stack, Link as ChakraLink, Text } from '@chakra-ui/react';
 
 export default function Header() {
   return (
-    <Container>
-      <div>
-        <nav>
-          <Link href="/import">
-            <a>Importar XML</a>
+    <Box as="header" bg="blue.900" h="20" shadow="xl">
+      <Flex
+        direction="row"
+        justify="space-between"
+        align="center"
+        maxW={1280}
+        px="4"
+        mx="auto"
+        h="100%"
+      >
+        <Stack as="nav" direction="row" spacing="8" align="center">
+          <Link href="/import" passHref>
+            <ChakraLink
+              color="gray.200"
+              fontSize="18"
+              _hover={{ color: 'whiteAlpha.600' }}
+            >
+              <Text>Importar XML</Text>
+            </ChakraLink>
           </Link>
 
-          <Link href="/">
-            <a>Sobre o projeto</a>
+          <Link href="/" passHref>
+            <ChakraLink
+              color="gray.200"
+              fontSize="18"
+              _hover={{ color: 'whiteAlpha.600' }}
+            >
+              <Text>Sobre o projeto</Text>
+            </ChakraLink>
           </Link>
-        </nav>
-        <a
+        </Stack>
+
+        <ChakraLink
           href="https://github.com/luiz21goncalves"
-          target="__blank"
-          rel="noopener noreferrer"
+          color="gray.200"
+          isExternal
+          fontSize="18"
+          _hover={{ color: 'blue.200' }}
         >
           Desenvolvido por Luiz Gonçalves
-        </a>
-      </div>
-    </Container>
+        </ChakraLink>
+      </Flex>
+    </Box>
   );
 }
