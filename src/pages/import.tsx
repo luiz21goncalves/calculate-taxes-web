@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { Box, Button, Flex, SimpleGrid, Text } from '@chakra-ui/react';
 
 import Header from '../components/Header';
 import Upload from '../components/Upload';
-import { Container, Content, TableHeader, TableFooter } from '../styles/import';
 import Table, { Product } from '../components/Table';
 import { formattedPrice } from '../utils';
 
@@ -33,7 +33,7 @@ interface Note {
 
 export default function Import() {
   const [note, setNote] = useState<Note>({} as Note);
-  const [showInput, setShowInput] = useState(true);
+  const [showTable, setShowTable] = useState(true);
   const [file, setFile] = useState(null);
 
   const handleUpload = (files: File[]) => {
@@ -52,7 +52,7 @@ export default function Import() {
 
       setNote(response.data);
 
-      setShowInput(false);
+      setShowTable(false);
     } catch (err) {
       console.error(err);
       toast.error('Ocorreu um erro tente novamente ou contate o desenvolvedor');
@@ -63,56 +63,48 @@ export default function Import() {
     <>
       <Header />
 
-      <Container>
-        <Content>
+      <Box maxW={1280} mx="auto" mt="16" px="4">
+        <Flex
+          align="center"
+          justify="space-between"
+          maxW={1280}
+          mx="auto"
+          px="4"
+        >
           <Upload onUpload={handleUpload} file={file} />
 
-          <button type="button" onClick={handleSubmit}>
+          <Button
+            colorScheme="blue"
+            type="submit"
+            size="lg"
+            onClick={handleSubmit}
+            isDisabled={!file}
+          >
             Calcular preço
-          </button>
-        </Content>
+          </Button>
+        </Flex>
 
-        {!showInput && (
-          <>
-            <TableHeader>
-              <strong>Número: {note.number}</strong>
-              <div>
-                <span>Comprador</span>
-
-                <p>{note.customer.name}</p>
-
-                <p>
-                  <b>CNPJ: </b>
-                  <span>{note.customer.cnpj}</span>
-                </p>
-              </div>
-              <div>
-                <span>Venderdor</span>
-
-                <p>{note.seller.name}</p>
-
-                <p>
-                  <b>CNPJ: </b>
-                  <span>{note.seller.cnpj}</span>
-                </p>
-              </div>
-            </TableHeader>
-
+        {!showTable && (
+          <Box mt="12">
             <Table products={note.products} />
 
-            <TableFooter>
-              <p>TOTAL DA NF-e: {formattedPrice(note.total.nf)}</p>
-              <p>VALOR DOS PRODUTOS: {formattedPrice(note.total.products)}</p>
-              <p>ICMS ST: {formattedPrice(note.total.icms_st)}</p>
-              <p>IPI: {formattedPrice(note.total.ipi)}</p>
-              <p>SEGURO: {formattedPrice(note.total.safe)}</p>
-              <p>FRETE: {formattedPrice(note.total.shipping)}</p>
-              <p>DESCONTO: {formattedPrice(note.total.discount)}</p>
-              <p>OUTRAS DESPESAS: {formattedPrice(note.total.others)}</p>
-            </TableFooter>
-          </>
+            <SimpleGrid columns={4} mt="8" gap="4">
+              <Text fontWeight="bold">
+                TOTAL DA NF-e: {formattedPrice(note.total.nf)}
+              </Text>
+              <Text>
+                VALOR DOS PRODUTOS: {formattedPrice(note.total.products)}
+              </Text>
+              <Text>ICMS ST: {formattedPrice(note.total.icms_st)}</Text>
+              <Text>IPI: {formattedPrice(note.total.ipi)}</Text>
+              <Text>SEGURO: {formattedPrice(note.total.safe)}</Text>
+              <Text>FRETE: {formattedPrice(note.total.shipping)}</Text>
+              <Text>DESCONTO: {formattedPrice(note.total.discount)}</Text>
+              <Text>OUTRAS DESPESAS: {formattedPrice(note.total.others)}</Text>
+            </SimpleGrid>
+          </Box>
         )}
-      </Container>
+      </Box>
     </>
   );
 }
