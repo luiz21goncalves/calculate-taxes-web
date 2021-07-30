@@ -1,6 +1,5 @@
+import { Box, Text } from '@chakra-ui/react';
 import Dropzone from 'react-dropzone';
-
-import { DropContainer, UploadMessage } from './styles';
 
 interface UploadProps {
   onUpload: (files: File[]) => void;
@@ -10,31 +9,51 @@ interface UploadProps {
 export default function Upload({ onUpload, file }: UploadProps) {
   const renderDragMessage = (isDragActive: boolean, isDragReject: boolean) => {
     if (!isDragActive) {
-      return <UploadMessage type="default">Arraste xml aqui...</UploadMessage>;
+      return (
+        <Text fontSize="lg" fontWeight="bold">
+          Arraste xml aqui ...
+        </Text>
+      );
     }
 
     if (isDragReject) {
-      return <UploadMessage type="error">Arquivo não suportado</UploadMessage>;
+      return (
+        <Text fontSize="lg" fontWeight="bold" color="red.600">
+          Arquivo não suportado
+        </Text>
+      );
     }
 
-    return <UploadMessage type="success">Solte o xml aqui</UploadMessage>;
+    return (
+      <Text fontSize="lg" fontWeight="bold">
+        Solte o xml aqui
+      </Text>
+    );
   };
 
   return (
     <Dropzone accept="text/xml" onDropAccepted={onUpload}>
       {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
-        <DropContainer
+        <Box
           {...getRootProps()}
-          isDragActive={isDragActive}
-          isDragReject={isDragReject}
+          p="3"
+          border="2px"
+          borderRadius={8}
+          borderColor={isDragReject ? 'red.500' : 'blue.900'}
+          borderStyle="dashed"
+          w="70%"
+          align="center"
+          justify="center"
         >
           <input {...getInputProps()} multiple={false} />
           {file ? (
-            <p>{file.name}</p>
+            <Text fontSize="lg" fontWeight="bold">
+              {file.name}
+            </Text>
           ) : (
             renderDragMessage(isDragActive, isDragReject)
           )}
-        </DropContainer>
+        </Box>
       )}
     </Dropzone>
   );
