@@ -180,18 +180,18 @@ export default function Table({ products }: TableProps) {
               <Td borderRight="1px" borderRightColor="black">
                 <Text textAlign="center">{formattedPrice(unit_price)}</Text>
               </Td>
-              <Td borderRight="1px" borderRightColor="black">
+              <Td borderRight="1px" borderRightColor="black" p="2">
                 <Popover>
                   <PopoverTrigger>
                     <Button
-                      variant="outline"
+                      variant="solid"
                       fontWeight="bold"
                       textAlign="center"
                       w="100%"
                       h="100%"
+                      py="2"
                       fontSize="16"
-                      p="1"
-                      colorScheme="gray"
+                      colorScheme="blue"
                       onClick={() => handleShowProduct(id)}
                     >
                       {formattedPrice(total_price)}
