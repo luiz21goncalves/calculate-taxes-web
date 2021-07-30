@@ -86,6 +86,39 @@ export default function Import() {
 
         {!showTable && (
           <Box mt="12">
+            <SimpleGrid
+              columns={3}
+              border="1px"
+              borderColor="black"
+              borderBottom="none"
+            >
+              <Flex
+                justify="center"
+                align="center"
+                direction="column"
+                p="4"
+                borderRight="1px"
+                borderRightColor="black"
+              >
+                <Text fontWeight="bold">Nfe: {note.number}</Text>
+              </Flex>
+              <Flex
+                justify="center"
+                align="center"
+                direction="column"
+                p="4"
+                borderRight="1px"
+                borderRightColor="black"
+              >
+                <Text fontWeight="bold">Comprador: {note.customer.name}</Text>
+                <Text>CNPJ: {note.customer.cnpj}</Text>
+              </Flex>
+              <Flex justify="center" align="center" direction="column" p="4">
+                <Text fontWeight="bold">Vendedor: {note.seller.name}</Text>
+                <Text>CNPJ: {note.seller.cnpj}</Text>
+              </Flex>
+            </SimpleGrid>
+
             <Table products={note.products} />
 
             <SimpleGrid columns={4} mt="8" gap="4">
