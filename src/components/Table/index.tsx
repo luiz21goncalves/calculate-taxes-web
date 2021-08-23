@@ -221,6 +221,9 @@ export default function Table({ products }: TableProps) {
                         frete: {formattedPrice(showProduct?.shipping)}
                       </Text>
                       <Text fontSize="sm" textTransform="uppercase">
+                        desconto: {formattedPrice(showProduct?.discount)}
+                      </Text>
+                      <Text fontSize="sm" textTransform="uppercase">
                         preço total: {formattedPrice(showProduct?.total_price)}
                       </Text>
                     </PopoverBody>
