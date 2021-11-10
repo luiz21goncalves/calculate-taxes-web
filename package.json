@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "eslintConfig": {
     "extends": [
@@ -17,7 +19,7 @@
   "dependencies": {
     "@chakra-ui/core": "^0.8.0",
     "@chakra-ui/react": "^1.6.5",
-    "@emotion/react": "^11.4.0",
+    "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "axios": "^0.21.2",
     "dayjs": "^1.10.7",
@@ -29,11 +31,17 @@
     "react-toastify": "^7.0.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.0",
     "@lukemorales/eslint-config": "1.0.16",
+    "@storybook/addon-actions": "^6.3.12",
+    "@storybook/addon-essentials": "^6.3.12",
+    "@storybook/addon-links": "^6.3.12",
+    "@storybook/react": "^6.3.12",
     "@types/node": "^15.6.1",
     "@types/react": "^17.0.8",
     "@typescript-eslint/eslint-plugin": "4.15.2",
     "@typescript-eslint/parser": "4.15.2",
+    "babel-loader": "^8.2.3",
     "eslint": "7.21.0",
     "eslint-config-airbnb": "18.2.1",
     "eslint-config-prettier": "8.1.0",
