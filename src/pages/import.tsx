@@ -6,12 +6,28 @@ import { Box, Button, Flex, SimpleGrid, Text } from '@chakra-ui/react';
 
 import Header from '../components/Header';
 import Upload from '../components/Upload';
-import Table, { Product } from '../components/Table';
-import { formattedPrice } from '../utils';
+import { FormattedProduct, Table } from '../components/Table';
+import { priceFormatter } from '../utils';
 
 interface Company {
   cnpj: string;
   name: string;
+}
+
+interface Product {
+  id: string;
+  name: string;
+  quantity: number;
+  unit: string;
+  unit_price: number;
+  total_price: number;
+  taxes: {
+    icms_st: number;
+    ipi: number;
+  };
+  other: number;
+  discount: number;
+  shipping: number;
 }
 
 interface Note {
@@ -31,8 +47,25 @@ interface Note {
   };
 }
 
+interface FormattedNote {
+  number: number;
+  seller: Company;
+  customer: Company;
+  products: FormattedProduct[];
+  total: {
+    products: string;
+    others: string;
+    icms_st: string;
+    shipping: string;
+    ipi: string;
+    discount: string;
+    safe: string;
+    nf: string;
+  };
+}
+
 export default function Import() {
-  const [note, setNote] = useState<Note>({} as Note);
+  const [note, setNote] = useState<FormattedNote>({} as FormattedNote);
   const [showTable, setShowTable] = useState(true);
   const [file, setFile] = useState(null);
 
@@ -50,7 +83,62 @@ export default function Import() {
         data,
       );
 
-      setNote(response.data);
+      const formattedProducts = response.data.products.reduce(
+        (acc, product) => {
+          const {
+            quantity,
+            total_price,
+            discount,
+            other,
+            taxes,
+            id,
+            name,
+            shipping,
+            unit,
+          } = product;
+
+          const totalPrice =
+            total_price +
+            other +
+            taxes.ipi +
+            taxes.icms_st +
+            shipping -
+            discount;
+
+          acc.push({
+            id,
+            name,
+            unit,
+            quantity,
+            total_price: priceFormatter(totalPrice),
+            unit_price: priceFormatter(totalPrice / (quantity / 100)),
+          });
+
+          return acc;
+        },
+        [] as FormattedProduct[],
+      );
+
+      const { number, customer, seller, total } = response.data;
+
+      const formattedNote = {
+        products: formattedProducts,
+        number,
+        customer,
+        seller,
+        total: {
+          products: priceFormatter(total.products),
+          others: priceFormatter(total.others),
+          icms_st: priceFormatter(total.icms_st),
+          shipping: priceFormatter(total.shipping),
+          ipi: priceFormatter(total.ipi),
+          discount: priceFormatter(total.discount),
+          safe: priceFormatter(total.safe),
+          nf: priceFormatter(total.nf),
+        },
+      };
+
+      setNote(formattedNote);
 
       setShowTable(false);
     } catch (err) {
@@ -122,18 +210,14 @@ export default function Import() {
             <Table products={note.products} />
 
             <SimpleGrid columns={4} mt="8" gap="4">
-              <Text fontWeight="bold">
-                TOTAL DA NF-e: {formattedPrice(note.total.nf)}
-              </Text>
-              <Text>
-                VALOR DOS PRODUTOS: {formattedPrice(note.total.products)}
-              </Text>
-              <Text>ICMS ST: {formattedPrice(note.total.icms_st)}</Text>
-              <Text>IPI: {formattedPrice(note.total.ipi)}</Text>
-              <Text>SEGURO: {formattedPrice(note.total.safe)}</Text>
-              <Text>FRETE: {formattedPrice(note.total.shipping)}</Text>
-              <Text>DESCONTO: {formattedPrice(note.total.discount)}</Text>
-              <Text>OUTRAS DESPESAS: {formattedPrice(note.total.others)}</Text>
+              <Text fontWeight="bold">TOTAL DA NF-e: {note.total.nf}</Text>
+              <Text>VALOR DOS PRODUTOS: {note.total.products}</Text>
+              <Text>ICMS ST: {note.total.icms_st}</Text>
+              <Text>IPI: {note.total.ipi}</Text>
+              <Text>SEGURO: {note.total.safe}</Text>
+              <Text>FRETE: {note.total.shipping}</Text>
+              <Text>DESCONTO: {note.total.discount}</Text>
+              <Text>OUTRAS DESPESAS: {note.total.others}</Text>
             </SimpleGrid>
           </Box>
         )}
