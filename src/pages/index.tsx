@@ -19,7 +19,7 @@ export default function Home() {
         </Heading>
 
         <Text as="p" fontSize="18" lineHeight="2" mb="6">
-          Com tantas dificuldades para empreender no Brasil calcular o custo de
+          Com tantas dificuldades para empreender no Brasil, calcular o custo de
           aquisição de produtos é mais um deles. A Danfe (Documento Auxiliar da
           NF-e) não tem todas as informações necessárias, apenas um resumo, e
           muita das vezes os pequenos empreenderores não tem conhecimento para
