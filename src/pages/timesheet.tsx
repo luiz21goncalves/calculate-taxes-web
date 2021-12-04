@@ -7,7 +7,6 @@ import {
   Input,
   InputGroup,
   InputAddon,
-  Flex,
   Text,
 } from '@chakra-ui/react';
 import dayjs from 'dayjs';
@@ -47,12 +46,10 @@ export default function Timesheet() {
     <>
       <Header />
 
-      <Box as="main" maxW={1280} mx="auto" mt="8" px="4">
-        <Flex width="full" alignItems="center" justifyContent="space-between">
-          <Heading as="h1" mb="8">
-            Calculo de horas extras
-          </Heading>
-        </Flex>
+      <Box as="main" maxW="container.lg" mx="auto" mt="16" px="4">
+        <Heading as="h1" textAlign="center" mb="8">
+          Calculo de horas extras
+        </Heading>
 
         <Stack spacing="4" direction="row" mb="8" mt="8">
           <InputGroup>
@@ -64,17 +61,17 @@ export default function Timesheet() {
               value={workdayValue}
             />
           </InputGroup>
+
           <InputGroup>
             <InputAddon>Selecione a segunda-feira</InputAddon>
             <Input
               type="date"
-              width="48"
               value={selectedDay}
               onChange={(event) => setSelectedDay(event.target.value)}
             />
           </InputGroup>
 
-          <Stack alignItems="center" justifyContent="center" w="full">
+          <Stack alignItems="flex-end" justifyContent="center" w="full">
             <Text fontWeight="bold">
               Total de horas extras {convertMinutesInHours(totalOvertime)}
             </Text>
