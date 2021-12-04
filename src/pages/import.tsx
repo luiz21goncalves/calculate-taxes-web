@@ -151,7 +151,7 @@ export default function Import() {
     <>
       <Header />
 
-      <Box as="main" maxW={1280} mx="auto" mt="16" px="4">
+      <Box as="main" maxW="container.lg" mx="auto" my="16" px="4">
         <Flex
           align="center"
           justify="space-between"
