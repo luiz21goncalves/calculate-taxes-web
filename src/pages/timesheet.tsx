@@ -14,6 +14,7 @@ import dayjs from 'dayjs';
 
 import { Workday } from '../components/Workday';
 import { convertMinutesInHours } from '../utils';
+import Header from '../components/Header';
 
 type Overtime = {
   [key: string]: number;
@@ -44,6 +45,8 @@ export default function Timesheet() {
 
   return (
     <>
+      <Header />
+
       <Box as="main" maxW={1280} mx="auto" mt="8" px="4">
         <Flex width="full" alignItems="center" justifyContent="space-between">
           <Heading as="h1" mb="8">
