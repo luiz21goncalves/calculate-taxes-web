@@ -1,10 +1,10 @@
 import { Box, Text } from '@chakra-ui/react';
 import Dropzone from 'react-dropzone';
 
-interface UploadProps {
+type UploadProps = {
   onUpload: (files: File[]) => void;
   file: File;
-}
+};
 
 export default function Upload({ onUpload, file }: UploadProps) {
   const renderDragMessage = (isDragActive: boolean, isDragReject: boolean) => {

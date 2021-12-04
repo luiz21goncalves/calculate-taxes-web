@@ -8,18 +8,18 @@ import {
   Tr,
 } from '@chakra-ui/react';
 
-export interface FormattedProduct {
+export type FormattedProduct = {
   id: string;
   name: string;
   quantity: number;
   unit: string;
   unit_price: string;
   total_price: string;
-}
+};
 
-interface TableProps {
+type TableProps = {
   products: FormattedProduct[];
-}
+};
 
 export function Table({ products }: TableProps) {
   return (

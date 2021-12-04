@@ -9,12 +9,12 @@ import Upload from '../components/Upload';
 import { FormattedProduct, Table } from '../components/Table';
 import { priceFormatter } from '../utils';
 
-interface Company {
+type Company = {
   cnpj: string;
   name: string;
-}
+};
 
-interface Product {
+type Product = {
   id: string;
   name: string;
   quantity: number;
@@ -28,9 +28,9 @@ interface Product {
   other: number;
   discount: number;
   shipping: number;
-}
+};
 
-interface Note {
+type Note = {
   number: number;
   seller: Company;
   customer: Company;
@@ -45,9 +45,9 @@ interface Note {
     safe: number;
     nf: number;
   };
-}
+};
 
-interface FormattedNote {
+type FormattedNote = {
   number: number;
   seller: Company;
   customer: Company;
@@ -62,7 +62,7 @@ interface FormattedNote {
     safe: string;
     nf: string;
   };
-}
+};
 
 export default function Import() {
   const [note, setNote] = useState<FormattedNote>({} as FormattedNote);
