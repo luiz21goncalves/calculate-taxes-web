@@ -46,7 +46,7 @@ export default function Timesheet() {
     <>
       <Header />
 
-      <Box as="main" maxW="container.lg" mx="auto" mt="16" px="4">
+      <Box as="main" maxW="container.lg" mx="auto" my="16" px="4">
         <Heading as="h1" textAlign="center" mb="8">
           Calculo de horas extras
         </Heading>
