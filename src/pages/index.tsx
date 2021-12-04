@@ -13,8 +13,8 @@ export default function Home() {
 
       <Header />
 
-      <Box as="main" maxW={1280} mx="auto" mt="16" px="4">
-        <Heading as="h1" textAlign="center" mb="8" fontWeight="bold">
+      <Box as="main" maxW="container.lg" mx="auto" mt="16" px="4">
+        <Heading as="h1" textAlign="center" mb="8">
           Calcular custo de produtos na NF-e
         </Heading>
 
