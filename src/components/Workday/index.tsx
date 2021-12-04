@@ -1,18 +1,10 @@
 import { useState, Dispatch, SetStateAction } from 'react';
 
-import 'dayjs/locale/pt-br';
 import dayjs from 'dayjs';
-import {
-  Box,
-  Text,
-  Input,
-  InputGroup,
-  InputLeftAddon,
-  Stack,
-  Button,
-} from '@chakra-ui/react';
+import { Box, Text, Stack, Button, Flex } from '@chakra-ui/react';
 
 import { convertHoursInMinutes, convertMinutesInHours } from '../../utils';
+import { InputTime } from './InputTime';
 
 type Overtime = {
   [key: string]: number;
@@ -32,11 +24,11 @@ export function Workday({
   workdayValue,
   setTotalOvertime,
 }: WorkdayProps) {
-  const [entrance, setEntrance] = useState('00:00');
-  const [exit, setExit] = useState('00:00');
-  const [exitLunch, setExitLunch] = useState('00:00');
-  const [returnLunch, setReturnLunch] = useState('00:00');
-  const [overtime, setOvertime] = useState('00:00');
+  const [entrance, setEntrance] = useState('');
+  const [exit, setExit] = useState('');
+  const [exitLunch, setExitLunch] = useState('');
+  const [returnLunch, setReturnLunch] = useState('');
+  const [overtime, setOvertime] = useState('0');
   const [overtimeValue, setOvertimeValue] = useState('0');
 
   const formatedDate = dayjs(date).locale('pt-br').format('dddd DD/MM/YYYY');
@@ -99,57 +91,55 @@ export function Workday({
   }
 
   return (
-    <Box>
-      <Stack direction="row" spacing="8" margin="2" mb="4">
+    <Box borderTop="1px" borderTopStyle="solid" borderTopColor="gray.400">
+      <Flex direction="row" justify="space-between" align="center" mt="8">
         <Text fontWeight="bold" textTransform="capitalize">
           {formatedDate}
         </Text>
+
         <Text>
-          horas extras {overtime} - correspondem a {overtimeValue}
+          horas extras {overtime}, correspondem a {overtimeValue}
         </Text>
-      </Stack>
-      <Stack direction="row">
-        <InputGroup>
-          <InputLeftAddon>entrada</InputLeftAddon>
-          <Input
-            type="time"
-            w="28"
-            value={entrance}
-            onChange={(event) => setEntrance(event.target.value)}
-          />
-        </InputGroup>
+      </Flex>
 
-        <InputGroup>
-          <InputLeftAddon>almoço saida</InputLeftAddon>
-          <Input
-            type="time"
-            w="28"
-            value={exitLunch}
-            onChange={(event) => setExitLunch(event.target.value)}
-          />
-        </InputGroup>
+      <Stack
+        mt="6"
+        alignItems="center"
+        justifyContent="space-between"
+        direction="row"
+      >
+        <InputTime
+          label="horário de entrada"
+          value={entrance}
+          changeValue={setEntrance}
+        />
 
-        <InputGroup>
-          <InputLeftAddon>almoço retorno</InputLeftAddon>
-          <Input
-            type="time"
-            w="28"
-            value={returnLunch}
-            onChange={(event) => setReturnLunch(event.target.value)}
-          />
-        </InputGroup>
+        <InputTime
+          label="saida para almoço"
+          value={exitLunch}
+          changeValue={setExitLunch}
+        />
 
-        <InputGroup>
-          <InputLeftAddon>saida</InputLeftAddon>
-          <Input
-            type="time"
-            w="28"
-            value={exit}
-            onChange={(event) => setExit(event.target.value)}
-          />
-        </InputGroup>
+        <InputTime
+          label="retorno do almoço"
+          value={returnLunch}
+          changeValue={setReturnLunch}
+        />
 
-        <Button w="2xl" colorScheme="blue" onClick={handleCalculateOvertime}>
+        <InputTime
+          label="horário de saida"
+          value={exit}
+          changeValue={setExit}
+        />
+
+        <Button
+          py="4"
+          px="8"
+          colorScheme="blue"
+          onClick={handleCalculateOvertime}
+          textTransform="uppercase"
+          fontSize="sm"
+        >
           calcular
         </Button>
       </Stack>
