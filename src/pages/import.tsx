@@ -141,9 +141,8 @@ export default function Import() {
       setNote(formattedNote);
 
       setShowTable(false);
-    } catch (err) {
-      console.error(err);
-      toast.error('Ocorreu um erro tente novamente ou contate o desenvolvedor');
+    } catch {
+      toast.error('Não foi possível calcular essa NFE-e.');
     }
   };
 
