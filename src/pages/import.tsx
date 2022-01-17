@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Box, Button, Flex, SimpleGrid, Text } from '@chakra-ui/react';
 
@@ -8,6 +7,7 @@ import Header from '../components/Header';
 import Upload from '../components/Upload';
 import { FormattedProduct, Table } from '../components/Table';
 import { priceFormatter } from '../utils';
+import { api } from '../services/api';
 
 type Company = {
   cnpj: string;
@@ -78,10 +78,7 @@ export default function Import() {
       const data = new FormData();
       data.append('file', file, file.name);
 
-      const response = await axios.post<Note>(
-        `${process.env.NEXT_PUBLIC_API_URL}/xml/import`,
-        data,
-      );
+      const response = await api.post<Note>('xml/import', data);
 
       const formattedProducts = response.data.products.reduce(
         (acc, product) => {
