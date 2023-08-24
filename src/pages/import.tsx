@@ -65,8 +65,8 @@ type FormattedNote = {
 };
 
 type ImportResponse = {
-  id: string
-}
+  id: string;
+};
 
 export default function Import() {
   const [note, setNote] = useState<FormattedNote>({} as FormattedNote);
@@ -83,7 +83,9 @@ export default function Import() {
       data.append('file', file, file.name);
 
       const importResponse = await api.post<ImportResponse>('xml', data);
-      const noteResponse = await api.get<Note>(`/calculate/${importResponse.data.id}`)
+      const noteResponse = await api.get<Note>(
+        `/calculate/${importResponse.data.id}`,
+      );
 
       const formattedProducts = noteResponse.data.products.reduce(
         (acc, product) => {
