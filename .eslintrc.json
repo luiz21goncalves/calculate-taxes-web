@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "@rocketseat/eslint-config/next", 
+    "next/core-web-vitals"
+  ],
+  "plugins": ["eslint-plugin-import-helpers"],
+  "rules": {
+    "react/self-closing-comp": "error",
+    "import-helpers/order-imports": ["warn", {
+      "newlinesBetween": "always",
+      "groups": [
+        ["/^next/", "/^react/"],
+        "module",
+        "/^@\//",
+        ["parent", "sibling", "index"]
+      ],
+      "alphabetize": { "order": "asc", "ignoreCase": true }
+    }]
+  }
+}
