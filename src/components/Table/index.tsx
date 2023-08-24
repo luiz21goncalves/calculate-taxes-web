@@ -6,20 +6,20 @@ import {
   Th,
   Thead,
   Tr,
-} from '@chakra-ui/react';
+} from '@chakra-ui/react'
 
 export type FormattedProduct = {
-  id: string;
-  name: string;
-  quantity: number;
-  unit: string;
-  unit_price: string;
-  total_price: string;
-};
+  id: string
+  name: string
+  quantity: number
+  unit: string
+  unitPrice: string
+  totalPrice: string
+}
 
 type TableProps = {
-  products: FormattedProduct[];
-};
+  products: FormattedProduct[]
+}
 
 export function Table({ products }: TableProps) {
   return (
@@ -60,40 +60,33 @@ export function Table({ products }: TableProps) {
       </Thead>
 
       <Tbody>
-        {products.map(
-          ({ id, name, quantity, total_price, unit_price, unit }) => (
-            <Tr key={id}>
-              <Td border="1px" borderColor="black">
-                <Text textAlign="center">{id}</Text>
-              </Td>
-              <Td borderRight="1px" borderRightColor="black">
-                <Text textAlign="center">{name}</Text>
-              </Td>
-              <Td borderRight="1px" borderRightColor="black">
-                <Text textAlign="center" textTransform="uppercase">
-                  {unit}
-                </Text>
-              </Td>
-              <Td borderRight="1px" borderRightColor="black">
-                <Text textAlign="center">{quantity / 100}</Text>
-              </Td>
-              <Td borderRight="1px" borderRightColor="black">
-                <Text textAlign="center">{unit_price}</Text>
-              </Td>
-              <Td
-                borderRight="1px"
-                borderRightColor="black"
-                p="2"
-                bg="blue.100"
-              >
-                <Text textAlign="center" fontWeight="extrabold">
-                  {total_price}
-                </Text>
-              </Td>
-            </Tr>
-          ),
-        )}
+        {products.map(({ id, name, quantity, totalPrice, unitPrice, unit }) => (
+          <Tr key={id}>
+            <Td border="1px" borderColor="black">
+              <Text textAlign="center">{id}</Text>
+            </Td>
+            <Td borderRight="1px" borderRightColor="black">
+              <Text textAlign="center">{name}</Text>
+            </Td>
+            <Td borderRight="1px" borderRightColor="black">
+              <Text textAlign="center" textTransform="uppercase">
+                {unit}
+              </Text>
+            </Td>
+            <Td borderRight="1px" borderRightColor="black">
+              <Text textAlign="center">{quantity / 100}</Text>
+            </Td>
+            <Td borderRight="1px" borderRightColor="black">
+              <Text textAlign="center">{unitPrice}</Text>
+            </Td>
+            <Td borderRight="1px" borderRightColor="black" p="2" bg="blue.100">
+              <Text textAlign="center" fontWeight="extrabold">
+                {totalPrice}
+              </Text>
+            </Td>
+          </Tr>
+        ))}
       </Tbody>
     </ChakraTable>
-  );
+  )
 }

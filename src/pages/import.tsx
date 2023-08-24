@@ -1,97 +1,97 @@
-import { useState } from 'react';
+import { useState } from 'react'
+import { toast } from 'react-toastify'
 
-import { toast } from 'react-toastify';
-import { Box, Button, Flex, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, SimpleGrid, Text } from '@chakra-ui/react'
 
-import Header from '../components/Header';
-import Upload from '../components/Upload';
-import { FormattedProduct, Table } from '../components/Table';
-import { priceFormatter } from '../utils';
-import { api } from '../services/api';
+import Header from '../components/Header'
+import { FormattedProduct, Table } from '../components/Table'
+import Upload from '../components/Upload'
+import { api } from '../services/api'
+import { priceFormatter } from '../utils'
 
 type Company = {
-  document: string;
-  name: string;
-};
+  document: string
+  name: string
+}
 
 type Product = {
-  id: string;
-  name: string;
-  quantity: number;
-  unit: string;
-  unit_price: number;
-  total_price: number;
+  id: string
+  name: string
+  quantity: number
+  unit: string
+  unit_price: number
+  total_price: number
   taxes: {
-    icms_st: number;
-    ipi: number;
-  };
-  other: number;
-  discount: number;
-  shipping: number;
-};
+    icms_st: number
+    ipi: number
+  }
+  other: number
+  discount: number
+  shipping: number
+}
 
 type Note = {
-  number: number;
-  seller: Company;
-  customer: Company;
-  products: Product[];
+  number: number
+  seller: Company
+  customer: Company
+  products: Product[]
   total: {
-    products: number;
-    others: number;
-    icms_st: number;
-    shipping: number;
-    ipi: number;
-    discount: number;
-    safe: number;
-    nf: number;
-  };
-};
+    products: number
+    others: number
+    icms_st: number
+    shipping: number
+    ipi: number
+    discount: number
+    safe: number
+    nf: number
+  }
+}
 
 type FormattedNote = {
-  number: number;
-  seller: Company;
-  customer: Company;
-  products: FormattedProduct[];
+  number: number
+  seller: Company
+  customer: Company
+  products: FormattedProduct[]
   total: {
-    products: string;
-    others: string;
-    icms_st: string;
-    shipping: string;
-    ipi: string;
-    discount: string;
-    safe: string;
-    nf: string;
-  };
-};
+    products: string
+    others: string
+    icms_st: string
+    shipping: string
+    ipi: string
+    discount: string
+    safe: string
+    nf: string
+  }
+}
 
 type ImportResponse = {
-  id: string;
-};
+  id: string
+}
 
 export default function Import() {
-  const [note, setNote] = useState<FormattedNote>({} as FormattedNote);
-  const [showTable, setShowTable] = useState(true);
-  const [file, setFile] = useState(null);
+  const [note, setNote] = useState<FormattedNote>({} as FormattedNote)
+  const [showTable, setShowTable] = useState(true)
+  const [file, setFile] = useState(null)
 
   const handleUpload = (files: File[]) => {
-    setFile(files[0]);
-  };
+    setFile(files[0])
+  }
 
   const handleSubmit = async () => {
     try {
-      const data = new FormData();
-      data.append('file', file, file.name);
+      const data = new FormData()
+      data.append('file', file, file.name)
 
-      const importResponse = await api.post<ImportResponse>('xml', data);
+      const importResponse = await api.post<ImportResponse>('xml', data)
       const noteResponse = await api.get<Note>(
         `/calculate/${importResponse.data.id}`,
-      );
+      )
 
       const formattedProducts = noteResponse.data.products.reduce(
         (acc, product) => {
           const {
             quantity,
-            total_price,
+            total_price: total,
             discount,
             other,
             taxes,
@@ -99,31 +99,26 @@ export default function Import() {
             name,
             shipping,
             unit,
-          } = product;
+          } = product
 
           const totalPrice =
-            total_price +
-            other +
-            taxes.ipi +
-            taxes.icms_st +
-            shipping -
-            discount;
+            total + other + taxes.ipi + taxes.icms_st + shipping - discount
 
           acc.push({
             id,
             name,
             unit,
             quantity,
-            total_price: priceFormatter(totalPrice),
-            unit_price: priceFormatter(totalPrice / (quantity / 100)),
-          });
+            totalPrice: priceFormatter(totalPrice),
+            unitPrice: priceFormatter(totalPrice / (quantity / 100)),
+          })
 
-          return acc;
+          return acc
         },
         [] as FormattedProduct[],
-      );
+      )
 
-      const { number, customer, seller, total } = noteResponse.data;
+      const { number, customer, seller, total } = noteResponse.data
 
       const formattedNote = {
         products: formattedProducts,
@@ -140,15 +135,15 @@ export default function Import() {
           safe: priceFormatter(total.safe),
           nf: priceFormatter(total.nf),
         },
-      };
+      }
 
-      setNote(formattedNote);
+      setNote(formattedNote)
 
-      setShowTable(false);
+      setShowTable(false)
     } catch {
-      toast.error('Não foi possível calcular essa NFE-e.');
+      toast.error('Não foi possível calcular essa NFE-e.')
     }
-  };
+  }
 
   return (
     <>
@@ -226,5 +221,5 @@ export default function Import() {
         )}
       </Box>
     </>
-  );
+  )
 }

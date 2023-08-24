@@ -1,8 +1,8 @@
-import Head from 'next/head';
+import Head from 'next/head'
 
-import { Box, Text, Heading } from '@chakra-ui/react';
+import { Box, Text, Heading } from '@chakra-ui/react'
 
-import Header from '../components/Header';
+import Header from '../components/Header'
 
 export default function Home() {
   return (
@@ -34,5 +34,5 @@ export default function Home() {
         </Text>
       </Box>
     </>
-  );
+  )
 }

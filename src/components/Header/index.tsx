@@ -1,6 +1,6 @@
-import { Box, Stack } from '@chakra-ui/react';
+import { Box, Stack } from '@chakra-ui/react'
 
-import { NavLink } from './NavLink';
+import { NavLink } from './NavLink'
 
 export default function Header() {
   return (
@@ -21,5 +21,5 @@ export default function Header() {
         <NavLink href="/timesheet">Calcular horas extras</NavLink>
       </Stack>
     </Box>
-  );
+  )
 }

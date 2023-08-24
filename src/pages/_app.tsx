@@ -1,10 +1,10 @@
-import { AppProps } from 'next/app';
+import { AppProps } from 'next/app'
+import { ToastContainer } from 'react-toastify'
 
-import { ToastContainer } from 'react-toastify';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react'
 
-import { theme } from '../styles/theme';
-import 'react-toastify/dist/ReactToastify.css';
+import { theme } from '../styles/theme'
+import 'react-toastify/dist/ReactToastify.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
       <ToastContainer />
     </ChakraProvider>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp

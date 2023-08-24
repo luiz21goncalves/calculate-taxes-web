@@ -1,10 +1,11 @@
-import { Box, Text } from '@chakra-ui/react';
-import Dropzone from 'react-dropzone';
+import Dropzone from 'react-dropzone'
+
+import { Box, Text } from '@chakra-ui/react'
 
 type UploadProps = {
-  onUpload: (files: File[]) => void;
-  file: File;
-};
+  onUpload: (files: File[]) => void
+  file: File
+}
 
 export default function Upload({ onUpload, file }: UploadProps) {
   const renderDragMessage = (isDragActive: boolean, isDragReject: boolean) => {
@@ -13,7 +14,7 @@ export default function Upload({ onUpload, file }: UploadProps) {
         <Text fontSize="lg" fontWeight="bold">
           Arraste xml aqui ...
         </Text>
-      );
+      )
     }
 
     if (isDragReject) {
@@ -21,15 +22,15 @@ export default function Upload({ onUpload, file }: UploadProps) {
         <Text fontSize="lg" fontWeight="bold" color="red.600">
           Arquivo não suportado
         </Text>
-      );
+      )
     }
 
     return (
       <Text fontSize="lg" fontWeight="bold">
         Solte o xml aqui
       </Text>
-    );
-  };
+    )
+  }
 
   return (
     <Dropzone accept="text/xml" onDropAccepted={onUpload}>
@@ -56,5 +57,5 @@ export default function Upload({ onUpload, file }: UploadProps) {
         </Box>
       )}
     </Dropzone>
-  );
+  )
 }

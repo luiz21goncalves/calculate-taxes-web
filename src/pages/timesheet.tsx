@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react'
 
 import {
   Box,
@@ -8,39 +8,39 @@ import {
   InputGroup,
   InputAddon,
   Text,
-} from '@chakra-ui/react';
-import dayjs from 'dayjs';
+} from '@chakra-ui/react'
+import dayjs from 'dayjs'
 
-import { Workday } from '../components/Workday';
-import { convertMinutesInHours } from '../utils';
-import Header from '../components/Header';
+import Header from '../components/Header'
+import { Workday } from '../components/Workday'
+import { convertMinutesInHours } from '../utils'
 
 type Overtime = {
-  [key: string]: number;
-};
+  [key: string]: number
+}
 
 export default function Timesheet() {
-  const [workdayValue, setWorkdayValue] = useState(50);
-  const [selectedDay, setSelectedDay] = useState('');
-  const [overtime, setOvertime] = useState<Overtime>({});
-  const [totalOvertime, setTotalOvertime] = useState(0);
-  const [overtimeValue, setOvertimeValue] = useState('0.00');
+  const [workdayValue, setWorkdayValue] = useState(50)
+  const [selectedDay, setSelectedDay] = useState('')
+  const [overtime, setOvertime] = useState<Overtime>({})
+  const [totalOvertime, setTotalOvertime] = useState(0)
+  const [overtimeValue, setOvertimeValue] = useState('0.00')
 
   useEffect(() => {
-    const sum = Object.values(overtime).reduce((acc, value) => acc + value, 0);
+    const sum = Object.values(overtime).reduce((acc, value) => acc + value, 0)
 
-    setTotalOvertime(sum);
-  }, [overtime]);
+    setTotalOvertime(sum)
+  }, [overtime])
 
   const calculateOvertimeValue = useCallback(() => {
-    const workMinutesValue = workdayValue / (8 * 60);
+    const workMinutesValue = workdayValue / (8 * 60)
 
-    setOvertimeValue(Number(totalOvertime * workMinutesValue).toFixed(2));
-  }, [totalOvertime, workdayValue]);
+    setOvertimeValue(Number(totalOvertime * workMinutesValue).toFixed(2))
+  }, [totalOvertime, workdayValue])
 
   useEffect(() => {
-    calculateOvertimeValue();
-  }, [calculateOvertimeValue]);
+    calculateOvertimeValue()
+  }, [calculateOvertimeValue])
 
   return (
     <>
@@ -115,5 +115,5 @@ export default function Timesheet() {
         </Stack>
       </Box>
     </>
-  );
+  )
 }

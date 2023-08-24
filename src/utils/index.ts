@@ -2,21 +2,21 @@ export const priceFormatter = (value: number) =>
   new Intl.NumberFormat('pt-br', {
     style: 'currency',
     currency: 'BRL',
-  }).format(value / 100);
+  }).format(value / 100)
 
 export function convertHoursInMinutes(time: string) {
-  const [hours, minutes] = time.split(':');
+  const [hours, minutes] = time.split(':')
 
-  return Number(hours) * 60 + Number(minutes);
+  return Number(hours) * 60 + Number(minutes)
 }
 
 export function convertMinutesInHours(time: number) {
-  const convertedMinutes = time % 60;
-  const convertedHour = Math.floor(time / 60);
+  const convertedMinutes = time % 60
+  const convertedHour = Math.floor(time / 60)
 
-  const formatedHour = convertedHour > 10 ? convertedHour : `0${convertedHour}`;
+  const formatedHour = convertedHour > 10 ? convertedHour : `0${convertedHour}`
   const formetedMinute =
-    convertedMinutes > 10 ? convertedMinutes : `0${convertedMinutes}`;
+    convertedMinutes > 10 ? convertedMinutes : `0${convertedMinutes}`
 
-  return `${formatedHour}:${formetedMinute}`;
+  return `${formatedHour}:${formetedMinute}`
 }

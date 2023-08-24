@@ -1,22 +1,22 @@
-import Link, { LinkProps } from 'next/link';
-import { useRouter } from 'next/router';
-import { cloneElement, ReactElement } from 'react';
+import Link, { LinkProps } from 'next/link'
+import { useRouter } from 'next/router'
+import { cloneElement, ReactElement } from 'react'
 
-import { LinkProps as ChakraLinkPros } from '@chakra-ui/react';
+import { LinkProps as ChakraLinkPros } from '@chakra-ui/react'
 
 type ActiveLinkProps = {
-  children: ReactElement;
-} & LinkProps;
+  children: ReactElement
+} & LinkProps
 
 export function ActiveLink(props: ActiveLinkProps) {
-  const { children, ...attrs } = props;
+  const { children, ...attrs } = props
 
-  const { asPath } = useRouter();
+  const { asPath } = useRouter()
 
-  let isActive = false;
+  let isActive = false
 
   if (asPath === attrs.href || asPath === attrs.as) {
-    isActive = true;
+    isActive = true
   }
 
   return (
@@ -26,5 +26,5 @@ export function ActiveLink(props: ActiveLinkProps) {
         borderBottom: isActive && '1px solid',
       })}
     </Link>
-  );
+  )
 }

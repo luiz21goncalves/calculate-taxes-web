@@ -1,38 +1,38 @@
-import { useState, Dispatch, SetStateAction } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react'
 
-import dayjs from 'dayjs';
-import { Box, Text, Stack, Button, Flex } from '@chakra-ui/react';
+import { Box, Text, Stack, Button, Flex } from '@chakra-ui/react'
+import dayjs from 'dayjs'
 
-import { convertHoursInMinutes, convertMinutesInHours } from '../../utils';
-import { InputTime } from './InputTime';
+import { convertHoursInMinutes, convertMinutesInHours } from '../../utils'
+import { InputTime } from './InputTime'
 
 type Overtime = {
-  [key: string]: number;
-};
+  [key: string]: number
+}
 
 type WorkdayProps = {
-  date: Date;
-  workdayValue: number;
-  setTotalOvertime: Dispatch<SetStateAction<Overtime>>;
-};
+  date: Date
+  workdayValue: number
+  setTotalOvertime: Dispatch<SetStateAction<Overtime>>
+}
 
-const FULL_WORKER_MINUTES = 480;
-const SATURDAY_MINUTES = 300;
+const FULL_WORKER_MINUTES = 480
+const SATURDAY_MINUTES = 300
 
 export function Workday({
   date,
   workdayValue,
   setTotalOvertime,
 }: WorkdayProps) {
-  const [entrance, setEntrance] = useState('');
-  const [exit, setExit] = useState('');
-  const [exitLunch, setExitLunch] = useState('');
-  const [returnLunch, setReturnLunch] = useState('');
-  const [overtime, setOvertime] = useState('0');
-  const [overtimeValue, setOvertimeValue] = useState('0');
+  const [entrance, setEntrance] = useState('')
+  const [exit, setExit] = useState('')
+  const [exitLunch, setExitLunch] = useState('')
+  const [returnLunch, setReturnLunch] = useState('')
+  const [overtime, setOvertime] = useState('0')
+  const [overtimeValue, setOvertimeValue] = useState('0')
 
-  const formatedDate = dayjs(date).locale('pt-br').format('dddd DD/MM/YYYY');
-  const weekday = dayjs(date).format('dddd');
+  const formatedDate = dayjs(date).locale('pt-br').format('dddd DD/MM/YYYY')
+  const weekday = dayjs(date).format('dddd')
 
   function getOvertime(
     entranceMinutes: number,
@@ -41,32 +41,32 @@ export function Workday({
     exitMinutes: number,
     defaultWorkMinutes: number,
   ) {
-    const lunchMinutes = returnLunchMinutes - exitLunchMinutes;
-    const workedMinutes = exitMinutes - entranceMinutes;
+    const lunchMinutes = returnLunchMinutes - exitLunchMinutes
+    const workedMinutes = exitMinutes - entranceMinutes
 
-    if (workedMinutes <= 0) return;
+    if (workedMinutes <= 0) return
 
-    const overtimeMinutes = workedMinutes - lunchMinutes - defaultWorkMinutes;
+    const overtimeMinutes = workedMinutes - lunchMinutes - defaultWorkMinutes
 
-    const result = convertMinutesInHours(overtimeMinutes);
+    const result = convertMinutesInHours(overtimeMinutes)
 
-    const workMinutesValue = workdayValue / (8 * 60);
+    const workMinutesValue = workdayValue / (8 * 60)
 
     setTotalOvertime((prevState) => ({
       ...prevState,
       [weekday.toLowerCase()]: overtimeMinutes,
-    }));
+    }))
 
-    setOvertimeValue(Number(overtimeMinutes * workMinutesValue).toFixed(2));
+    setOvertimeValue(Number(overtimeMinutes * workMinutesValue).toFixed(2))
 
-    setOvertime(result);
+    setOvertime(result)
   }
 
   function handleCalculateOvertime() {
-    const entranceMinutes = convertHoursInMinutes(entrance);
-    const exitMinutes = convertHoursInMinutes(exit);
-    const exitLunchMinutes = convertHoursInMinutes(exitLunch);
-    const returnLunchMinutes = convertHoursInMinutes(returnLunch);
+    const entranceMinutes = convertHoursInMinutes(entrance)
+    const exitMinutes = convertHoursInMinutes(exit)
+    const exitLunchMinutes = convertHoursInMinutes(exitLunch)
+    const returnLunchMinutes = convertHoursInMinutes(returnLunch)
 
     if (
       weekday.toLowerCase() !== 'saturday' &&
@@ -78,7 +78,7 @@ export function Workday({
         returnLunchMinutes,
         exitMinutes,
         FULL_WORKER_MINUTES,
-      );
+      )
     } else {
       getOvertime(
         entranceMinutes,
@@ -86,7 +86,7 @@ export function Workday({
         returnLunchMinutes,
         exitMinutes,
         SATURDAY_MINUTES,
-      );
+      )
     }
   }
 
@@ -144,5 +144,5 @@ export function Workday({
         </Button>
       </Stack>
     </Box>
-  );
+  )
 }

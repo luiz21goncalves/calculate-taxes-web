@@ -1,13 +1,13 @@
-import { Flex, Text, Input } from '@chakra-ui/react';
+import { Flex, Text, Input } from '@chakra-ui/react'
 
 type InputTimeProps = {
-  label: string;
-  value: string;
-  changeValue: (value: string) => void;
-};
+  label: string
+  value: string
+  changeValue: (value: string) => void
+}
 
 export function InputTime(props: InputTimeProps) {
-  const { label, value, changeValue } = props;
+  const { label, value, changeValue } = props
 
   return (
     <Flex direction="column" align="center" justify="center">
@@ -18,5 +18,5 @@ export function InputTime(props: InputTimeProps) {
         onChange={(event) => changeValue(event.target.value)}
       />
     </Flex>
-  );
+  )
 }
