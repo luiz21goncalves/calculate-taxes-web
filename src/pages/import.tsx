@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { toast } from 'react-toastify'
 
-import { Box, Button, Flex, SimpleGrid, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, SimpleGrid, Text, useToast } from '@chakra-ui/react'
 
 import Header from '../components/Header'
 import { FormattedProduct, Table } from '../components/Table'
@@ -72,6 +71,7 @@ export default function Import() {
   const [note, setNote] = useState<FormattedNote>({} as FormattedNote)
   const [showTable, setShowTable] = useState(true)
   const [file, setFile] = useState(null)
+  const toast = useToast()
 
   const handleUpload = (files: File[]) => {
     setFile(files[0])
@@ -141,7 +141,12 @@ export default function Import() {
 
       setShowTable(false)
     } catch {
-      toast.error('Não foi possível calcular essa NFE-e.')
+      toast({
+        title: 'Não foi possível calcular essa NFE-e.',
+        position: 'top-right',
+        isClosable: true,
+        status: 'error',
+      })
     }
   }
 
