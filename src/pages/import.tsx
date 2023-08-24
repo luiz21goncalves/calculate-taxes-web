@@ -200,11 +200,11 @@ export default function Import() {
                 borderRightColor="black"
               >
                 <Text fontWeight="bold">Comprador: {note.customer.name}</Text>
-                <Text>CNPJ: {note.customer.cnpj}</Text>
+                <Text>CNPJ: {note.customer.document}</Text>
               </Flex>
               <Flex justify="center" align="center" direction="column" p="4">
                 <Text fontWeight="bold">Vendedor: {note.seller.name}</Text>
-                <Text>CNPJ: {note.seller.cnpj}</Text>
+                <Text>CNPJ: {note.seller.document}</Text>
               </Flex>
             </SimpleGrid>
 
