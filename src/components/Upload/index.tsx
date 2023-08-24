@@ -1,6 +1,6 @@
-import Dropzone from 'react-dropzone'
+import { ChangeEvent, useCallback } from 'react'
 
-import { Box, Text } from '@chakra-ui/react'
+import { Input, Text } from '@chakra-ui/react'
 
 type UploadProps = {
   onUpload: (files: File[]) => void
@@ -8,54 +8,48 @@ type UploadProps = {
 }
 
 export default function Upload({ onUpload, file }: UploadProps) {
-  const renderDragMessage = (isDragActive: boolean, isDragReject: boolean) => {
-    if (!isDragActive) {
-      return (
-        <Text fontSize="lg" fontWeight="bold">
-          Arraste xml aqui ...
-        </Text>
-      )
-    }
-
-    if (isDragReject) {
-      return (
-        <Text fontSize="lg" fontWeight="bold" color="red.600">
-          Arquivo não suportado
-        </Text>
-      )
-    }
-
-    return (
-      <Text fontSize="lg" fontWeight="bold">
-        Solte o xml aqui
-      </Text>
-    )
-  }
+  const handleFileSelected = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      if (event.target.files?.length) {
+        const files = Array.from(event.target.files)
+        onUpload(files)
+      }
+    },
+    [onUpload],
+  )
 
   return (
-    <Dropzone accept="text/xml" onDropAccepted={onUpload}>
-      {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
-        <Box
-          {...getRootProps()}
-          p="3"
-          border="2px"
-          borderRadius={8}
-          borderColor={isDragReject ? 'red.500' : 'blue.900'}
-          borderStyle="dashed"
-          w="70%"
-          align="center"
-          justify="center"
-        >
-          <input {...getInputProps()} multiple={false} />
-          {file ? (
-            <Text fontSize="lg" fontWeight="bold">
-              {file.name}
-            </Text>
-          ) : (
-            renderDragMessage(isDragActive, isDragReject)
-          )}
-        </Box>
-      )}
-    </Dropzone>
+    <Text
+      as="label"
+      htmlFor="file"
+      p="3"
+      border="2px"
+      borderColor="blue.900"
+      borderRadius={8}
+      borderStyle="dashed"
+      w="70%"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      fontSize="lg"
+      fontWeight="bold"
+    >
+      {file ? file.name : 'Clique para importar xml'}
+      <Input
+        type="file"
+        name="file"
+        id="file"
+        position="absolute"
+        width="1px"
+        height="1px"
+        padding={0}
+        overflow="hidden"
+        clipPath="rect(0, 0, 0, 0)"
+        whiteSpace="nowrap"
+        borderWidth={0}
+        onChange={handleFileSelected}
+        accept="text/xml"
+      />
+    </Text>
   )
 }
