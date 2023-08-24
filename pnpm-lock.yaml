@@ -33,8 +33,8 @@ dependencies:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
   react-dropzone:
-    specifier: 11.3.2
-    version: 11.3.2(react@18.2.0)
+    specifier: 11.7.1
+    version: 11.7.1(react@18.2.0)
 
 devDependencies:
   '@rocketseat/eslint-config':
@@ -2880,8 +2880,8 @@ packages:
       flat-cache: 3.0.4
     dev: true
 
-  /file-selector@0.2.4:
-    resolution: {integrity: sha512-ZDsQNbrv6qRi1YTDOEWzf5J2KjZ9KMI1Q2SGeTkCJmNNW25Jg4TW4UMcmoqcg4WrAyKRcpBXdbWRxkfrOzVRbA==}
+  /file-selector@0.4.0:
+    resolution: {integrity: sha512-iACCiXeMYOvZqlF1kTiYINzgepRBymz1wwjiuup9u9nayhb6g4fSwiyJ/6adli+EPwrWtpgQAh2PoS7HukEGEg==}
     engines: {node: '>= 10'}
     dependencies:
       tslib: 2.6.2
@@ -3874,14 +3874,14 @@ packages:
       scheduler: 0.23.0
     dev: false
 
-  /react-dropzone@11.3.2(react@18.2.0):
-    resolution: {integrity: sha512-Z0l/YHcrNK1r85o6RT77Z5XgTARmlZZGfEKBl3tqTXL9fZNQDuIdRx/J0QjvR60X+yYu26dnHeaG2pWU+1HHvw==}
-    engines: {node: '>= 10'}
+  /react-dropzone@11.7.1(react@18.2.0):
+    resolution: {integrity: sha512-zxCMwhfPy1olUEbw3FLNPLhAm/HnaYH5aELIEglRbqabizKAdHs0h+WuyOpmA+v1JXn0++fpQDdNfUagWt5hJQ==}
+    engines: {node: '>= 10.13'}
     peerDependencies:
       react: '>= 16.8'
     dependencies:
       attr-accept: 2.2.2
-      file-selector: 0.2.4
+      file-selector: 0.4.0
       prop-types: 15.8.1
       react: 18.2.0
     dev: false
