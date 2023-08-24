@@ -10,7 +10,7 @@ import { priceFormatter } from '../utils';
 import { api } from '../services/api';
 
 type Company = {
-  cnpj: string;
+  document: string;
   name: string;
 };
 
@@ -64,6 +64,10 @@ type FormattedNote = {
   };
 };
 
+type ImportResponse = {
+  id: string
+}
+
 export default function Import() {
   const [note, setNote] = useState<FormattedNote>({} as FormattedNote);
   const [showTable, setShowTable] = useState(true);
@@ -78,9 +82,10 @@ export default function Import() {
       const data = new FormData();
       data.append('file', file, file.name);
 
-      const response = await api.post<Note>('xml/import', data);
+      const importResponse = await api.post<ImportResponse>('xml', data);
+      const noteResponse = await api.get<Note>(`/calculate/${importResponse.data.id}`)
 
-      const formattedProducts = response.data.products.reduce(
+      const formattedProducts = noteResponse.data.products.reduce(
         (acc, product) => {
           const {
             quantity,
@@ -116,7 +121,7 @@ export default function Import() {
         [] as FormattedProduct[],
       );
 
-      const { number, customer, seller, total } = response.data;
+      const { number, customer, seller, total } = noteResponse.data;
 
       const formattedNote = {
         products: formattedProducts,
