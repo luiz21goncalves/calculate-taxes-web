@@ -16,7 +16,7 @@
     "@chakra-ui/react": "2.8.0",
     "@emotion/react": "11.11.1",
     "@emotion/styled": "11.11.0",
-    "axios": "0.21.2",
+    "axios": "1.4.0",
     "dayjs": "1.10.7",
     "framer-motion": "10.16.1",
     "next": "13.4.19",
