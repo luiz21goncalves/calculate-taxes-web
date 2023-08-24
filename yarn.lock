@@ -1860,10 +1860,10 @@ eslint-module-utils@^2.6.0:
     debug "^3.2.7"
     pkg-dir "^2.0.0"
 
-eslint-plugin-10x@1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-10x/-/eslint-plugin-10x-1.5.0.tgz#1edbaf2e8c021c819f7bfa371836bf0a33b458a7"
-  integrity sha512-MZn5wgGgzBwE7SYnrwAhq1vb/vlt/Jw+ycezFr5x/BW1Kn7Uoe3WzKt5T4OITFVS6//BprMTT+79mYQvjlfWTQ==
+eslint-plugin-10x@1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-10x/-/eslint-plugin-10x-1.5.2.tgz#23c4b9a4f7e99b1fa8827e2e3c0f2055447a9ad9"
+  integrity sha512-SKVKlSJXJSU34Gw1m0Hp+PBO5az4zPIRU3+nC3Ya6x+nQ3Bq3kIfQUBH6dN811CawO6sacpc538IJAqTDSMSWQ==
   dependencies:
     jsx-ast-utils "^2.4.1"
 
