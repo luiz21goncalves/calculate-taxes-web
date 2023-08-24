@@ -18,23 +18,23 @@
     ]
   },
   "dependencies": {
-    "@chakra-ui/core": "^0.8.0",
-    "@chakra-ui/react": "^1.6.5",
-    "@emotion/react": "^11.4.0",
-    "@emotion/styled": "^11.3.0",
-    "axios": "^0.21.2",
-    "dayjs": "^1.10.7",
-    "framer-motion": "^4.1.17",
-    "next": "^12.1.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-dropzone": "^11.3.2",
-    "react-toastify": "^7.0.4"
+    "@chakra-ui/core": "0.8.0",
+    "@chakra-ui/react": "1.6.5",
+    "@emotion/react": "11.4.0",
+    "@emotion/styled": "11.3.0",
+    "axios": "0.21.2",
+    "dayjs": "1.10.7",
+    "framer-motion": "4.1.17",
+    "next": "12.1.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-dropzone": "11.3.2",
+    "react-toastify": "7.0.4"
   },
   "devDependencies": {
     "@lukemorales/eslint-config": "1.0.16",
-    "@types/node": "^15.6.1",
-    "@types/react": "^17.0.8",
+    "@types/node": "15.6.1",
+    "@types/react": "17.0.8",
     "@typescript-eslint/eslint-plugin": "4.15.2",
     "@typescript-eslint/parser": "4.15.2",
     "eslint": "7.21.0",
@@ -55,6 +55,6 @@
     "eslint-plugin-react-redux": "3.3.2",
     "eslint-plugin-testing-library": "3.10.1",
     "prettier": "2.2.1",
-    "typescript": "^4.3.2"
+    "typescript": "4.3.2"
   }
 }
