@@ -38,8 +38,8 @@ devDependencies:
     specifier: 2.1.0
     version: 2.1.0(eslint@8.48.0)(typescript@5.2.2)
   '@types/node':
-    specifier: 18.17.12
-    version: 18.17.12
+    specifier: 18.17.14
+    version: 18.17.14
   '@types/react':
     specifier: 18.2.21
     version: 18.2.21
@@ -1572,8 +1572,8 @@ packages:
     resolution: {integrity: sha512-BMVOiWs0uNxHVlHBgzTIqJYmj+PgCo4euloGF+5m4okL3rEYzM2EEv78mw8zWSMM57dM7kVIgJ2QDvwHSoCI5g==}
     dev: false
 
-  /@types/node@18.17.12:
-    resolution: {integrity: sha512-d6xjC9fJ/nSnfDeU0AMDsaJyb1iHsqCSOdi84w4u+SlN/UgQdY5tRhpMzaFYsI4mnpvgTivEaQd0yOUhAtOnEQ==}
+  /@types/node@18.17.14:
+    resolution: {integrity: sha512-ZE/5aB73CyGqgQULkLG87N9GnyGe5TcQjv34pwS8tfBs1IkCh0ASM69mydb2znqd6v0eX+9Ytvk6oQRqu8T1Vw==}
     dev: true
 
   /@types/parse-json@4.0.0:
