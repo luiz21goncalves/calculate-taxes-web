@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { Box, Button, Flex, SimpleGrid, Text, useToast } from '@chakra-ui/react'
 
-import Header from '../components/Header'
+import { Header } from '../components/Header'
 import { FormattedProduct, Table } from '../components/Table'
 import Upload from '../components/Upload'
 import { api } from '../services/api'

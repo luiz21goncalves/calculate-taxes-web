@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 import dayjs from 'dayjs'
 
-import Header from '../components/Header'
+import { Header } from '../components/Header'
 import { Workday } from '../components/Workday'
 import { convertMinutesInHours } from '../utils'
 

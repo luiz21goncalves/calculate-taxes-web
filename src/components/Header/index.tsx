@@ -2,7 +2,7 @@ import { Box, Stack } from '@chakra-ui/react'
 
 import { NavLink } from './NavLink'
 
-export default function Header() {
+export function Header() {
   return (
     <Box as="header" bg="blue.900" h="20" shadow="xl">
       <Stack
