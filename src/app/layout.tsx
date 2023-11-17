@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import { ReactNode } from 'react'
 
+import { Analytics } from '@vercel/analytics/react'
+
 import './global.css'
 
 export const metadata = {
@@ -19,7 +21,10 @@ export default function RootLayout(props: RootLayoutProps) {
 
   return (
     <html lang="pt-br">
-      <body className="bg-zinc-50 text-zinc-950 antialiased">{children}</body>
+      <body className="bg-zinc-50 text-zinc-950 antialiased">
+        {children}
+        <Analytics />
+      </body>
     </html>
   )
 }
