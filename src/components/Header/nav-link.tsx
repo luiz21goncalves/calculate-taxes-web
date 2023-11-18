@@ -8,14 +8,15 @@ import { twMerge } from 'tailwind-merge'
 type NavLinkProps = {
   children: string
   href: string
+  exactMatch?: boolean
 }
 
 export function NavLink(props: NavLinkProps) {
-  const { children, href } = props
+  const { children, href, exactMatch = true } = props
 
   const pathname = usePathname()
 
-  const isActive = pathname === href
+  const isActive = exactMatch ? pathname === href : pathname?.includes(href)
 
   return (
     <Link
