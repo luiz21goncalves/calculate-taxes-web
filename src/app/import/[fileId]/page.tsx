@@ -1,4 +1,4 @@
-import { api } from '@/services/api'
+import { api } from '@/data/api'
 import { priceFormatter } from '@/utils'
 
 type NoteDetailsPageProps = {
@@ -59,10 +59,14 @@ export default async function NoteDetailsPage(props: NoteDetailsPageProps) {
     params: { fileId },
   } = props
 
-  const response = await api.get<Note>(`/calculate/${fileId}`)
+  const response = await api(`/calculate/${fileId}`, {
+    next: {
+      revalidate: 60 * 60, // 1 hour
+    },
+  })
 
-  const note = response.data
-  const formattedProducts = response.data.products.reduce((acc, product) => {
+  const note = (await response.json()) as Note
+  const formattedProducts = note.products.reduce((acc, product) => {
     const {
       quantity,
       total_price: total,
