@@ -1,25 +1,13 @@
-import { Box, Stack } from '@chakra-ui/react'
-
 import { NavLink } from './NavLink'
 
 export function Header() {
   return (
-    <Box as="header" bg="blue.900" h="20" shadow="xl">
-      <Stack
-        as="nav"
-        direction="row"
-        spacing="8"
-        align="center"
-        justify="flex-start"
-        maxW="container.lg"
-        px="4"
-        mx="auto"
-        h="100%"
-      >
+    <header className="flex h-20 w-full items-center justify-center bg-blue-950">
+      <nav className="flex w-full max-w-5xl gap-4">
         <NavLink href="/">Home</NavLink>
         <NavLink href="/import">Importar XML</NavLink>
         <NavLink href="/timesheet">Calcular horas extras</NavLink>
-      </Stack>
-    </Box>
+      </nav>
+    </header>
   )
 }

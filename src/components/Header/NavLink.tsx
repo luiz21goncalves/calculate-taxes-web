@@ -1,6 +1,9 @@
-import { Link } from '@chakra-ui/react'
+'use client'
 
-import { ActiveLink } from './ActiveLink'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+
+import { twMerge } from 'tailwind-merge'
 
 type NavLinkProps = {
   children: string
@@ -10,11 +13,19 @@ type NavLinkProps = {
 export function NavLink(props: NavLinkProps) {
   const { children, href } = props
 
+  const pathname = usePathname()
+
+  const isActive = pathname === href
+
   return (
-    <ActiveLink href={href} passHref>
-      <Link fontSize="lg" fontWeight="bold" _hover={{ opacity: 0.6 }}>
-        {children}
-      </Link>
-    </ActiveLink>
+    <Link
+      href={href}
+      className={twMerge(
+        'text-lg font-semibold text-zinc-50/70 transition-colors hover:text-zinc-50/50',
+        isActive && 'border-b text-zinc-50',
+      )}
+    >
+      {children}
+    </Link>
   )
 }
