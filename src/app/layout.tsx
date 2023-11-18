@@ -5,6 +5,7 @@ import { ReactNode } from 'react'
 import { Analytics } from '@vercel/analytics/react'
 
 import './global.css'
+import { Header } from '@/components/Header'
 
 export const metadata = {
   title: {
@@ -28,7 +29,10 @@ export default function RootLayout(props: RootLayoutProps) {
   return (
     <html className={robotoSlab.variable} lang="pt-br">
       <body className="min-h-screen w-full bg-zinc-50 font-serif text-zinc-950 antialiased">
-        {children}
+        <Header />
+        <main className="mx-auto h-full w-full max-w-5xl px-4 py-16">
+          {children}
+        </main>
         <Analytics />
       </body>
     </html>
