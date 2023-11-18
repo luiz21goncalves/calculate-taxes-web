@@ -2,16 +2,19 @@
 
 import { redirect, RedirectType } from 'next/navigation'
 
-import { api } from '@/services/api'
+import { api } from '@/data/api'
 
 type UploadFileResponse = {
   id: string
 }
 
 export async function handleSendFile(formData: FormData) {
-  const response = await api.post<UploadFileResponse>('xml', formData)
+  const response = await api('xml', {
+    method: 'POST',
+    body: formData,
+  })
 
-  const fileId = response.data.id
+  const data = (await response.json()) as UploadFileResponse
 
-  return redirect(`/import/${fileId}`, RedirectType.push)
+  return redirect(`/import/${data.id}`, RedirectType.push)
 }
