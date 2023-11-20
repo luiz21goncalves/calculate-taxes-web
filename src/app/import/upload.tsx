@@ -2,6 +2,8 @@
 
 import { ChangeEvent, useState } from 'react'
 
+import { Button } from '@/components/button'
+
 import { handleSendFile } from './send-file-action'
 
 export function Upload() {
@@ -34,13 +36,13 @@ export function Upload() {
           onChange={handleSelectFile}
         />
       </label>
-      <button
+      <Button
         type="submit"
         disabled={!hasFile}
         className="rounded-lg bg-blue-500 px-8 text-lg font-bold text-zinc-50 transition-colors active:hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50"
       >
         Calcular
-      </button>
+      </Button>
     </form>
   )
 }
