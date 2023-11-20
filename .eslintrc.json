@@ -1,6 +1,6 @@
 {
   "extends": [
-    "@rocketseat/eslint-config/next", 
+    "@rocketseat/eslint-config/next",
     "next/core-web-vitals"
   ],
   "plugins": ["eslint-plugin-import-helpers"],
@@ -15,6 +15,7 @@
         ["parent", "sibling", "index"]
       ],
       "alphabetize": { "order": "asc", "ignoreCase": true }
-    }]
+    }],
+    "no-console": "error"
   }
 }
