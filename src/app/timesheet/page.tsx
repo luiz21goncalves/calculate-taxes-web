@@ -1,3 +1,5 @@
+import { Button } from '@/components/button'
+
 import { Workday } from './workday'
 
 export default function TimesheetPage() {
@@ -24,9 +26,9 @@ export default function TimesheetPage() {
             <span>valor total: 0</span>
           </div>
 
-          <button className="rounded-lg bg-blue-500 px-8 py-2 text-lg font-bold text-zinc-50 transition-colors hover:bg-blue-600">
+          <Button className="rounded-lg bg-blue-500 px-8 py-2 text-lg font-bold text-zinc-50 transition-colors hover:bg-blue-600">
             Adicionar dia
-          </button>
+          </Button>
         </div>
         <Workday />
       </div>
