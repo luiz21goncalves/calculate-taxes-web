@@ -7,7 +7,14 @@ export const priceFormatter = (value: number) =>
 export function convertHoursInMinutes(time: string) {
   const [hours, minutes] = time.split(':')
 
-  return Number(hours) * 60 + Number(minutes)
+  const formattedHours = Number(hours)
+  const formattedMinutes = Number(minutes)
+
+  if (Number.isNaN(formattedHours) || Number.isNaN(formattedMinutes)) {
+    return 0
+  }
+
+  return formattedHours * 60 + formattedMinutes
 }
 
 export function convertMinutesInHours(time: number) {
