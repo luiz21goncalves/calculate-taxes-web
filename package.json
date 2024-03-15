@@ -24,7 +24,7 @@
   "devDependencies": {
     "@rocketseat/eslint-config": "2.2.2",
     "@types/node": "20.11.24",
-    "@types/react": "18.2.60",
+    "@types/react": "18.2.61",
     "autoprefixer": "10.4.17",
     "eslint": "8.57.0",
     "eslint-config-next": "14.1.0",
