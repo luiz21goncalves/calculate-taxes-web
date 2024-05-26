@@ -16,15 +16,15 @@
     "@vercel/speed-insights": "1.0.10",
     "dayjs": "1.11.10",
     "next": "14.1.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "tailwind-merge": "2.2.2",
     "zod": "3.22.4"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "2.2.2",
     "@types/node": "20.12.2",
-    "@types/react": "18.2.73",
+    "@types/react": "18.3.2",
     "autoprefixer": "10.4.19",
     "eslint": "8.57.0",
     "eslint-config-next": "14.1.4",
