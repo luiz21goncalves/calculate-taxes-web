@@ -29,7 +29,7 @@ export function WorkdayList() {
           return (
             <Workday
               key={key}
-              date={dayjs(selectedDate).subtract(day, 'days').toDate()}
+              date={dayjs(selectedDate).subtract(2, 'days').toDate()}
             />
           )
         }

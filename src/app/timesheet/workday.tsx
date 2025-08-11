@@ -4,9 +4,9 @@ import { useEffect, useMemo, useState } from 'react'
 
 import dayjs from 'dayjs'
 
-import 'dayjs/locale/pt-br'
 import { useTimesheet } from '@/contexts/timesheet-context'
 import { convertHoursInMinutes, convertMinutesInHours } from '@/utils'
+import 'dayjs/locale/pt-br'
 
 const FULL_WORKER_MINUTES = 8 * 60
 const SATURDAY_MINUTES = 5 * 60
