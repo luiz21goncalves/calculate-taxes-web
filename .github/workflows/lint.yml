@@ -26,7 +26,7 @@ jobs:
       - name: install node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20.19.4
+          node-version: 22.18.0
           cache: 'pnpm'
 
         if: steps.pnpm-cache.outputs.cache-hit != 'true'
